@@ -10,11 +10,11 @@ func Workgroup(fn func(), workers int) *sync.WaitGroup {
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < workers; i++ {
+		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			fn()
 		}()
-		wg.Add(1)
 	}
 
 	return &wg
